@@ -16,11 +16,11 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+    detektPlugins("com.wolt.arrow.detekt:rules:0.3.0")
+
     implementation(platform("io.arrow-kt:arrow-stack:1.1.3"))
     implementation("io.arrow-kt:arrow-core")
     implementation("io.arrow-kt:arrow-fx-coroutines")
-
-    implementation("org.slf4j:slf4j-api:2.0.7")
 
     testImplementation(kotlin("test"))
 }
@@ -35,4 +35,11 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
+}
+
+detekt {
+    toolVersion = "1.23.0"
+    autoCorrect = true
+    buildUponDefaultConfig = true
+    config.from("$rootDir/gradle/detekt-config-overrides.yml")
 }
